@@ -1,0 +1,72 @@
+package mooving:moovables
+
+interface api {
+
+  record data {
+    date: string,
+    km: u32,
+  }
+
+  record moovable {
+    name: string,
+    moovable-type: string,
+    current: bool,
+    data: list<data>,
+  }
+
+  record moovables {
+    goal: u32,
+    moovables: list<moovable>,
+  }
+
+  record trend {
+    average: float64,
+    days: u32,
+    average-to-reach-goal: float64,
+    goal: u32,
+    total: u32,
+    this-period: u32,
+    moovable-name: string,
+  }
+
+  variant trend-result {
+    ok(trend),
+    error(string),
+  }
+
+  variant moovable-result {
+    ok(moovable),
+    error(string),
+  }
+
+  get-moovables:          func() -> list<moovable>
+
+  get-moovables-by-type:  func(moovable-type: string) -> list<moovable>
+
+  get-moovable:           func(name: string) -> moovable-result
+
+  add-moovable:           func(name: string, moovable-type: string) -> moovable-result
+
+  add-data:               func(name: string, data: data) -> moovable-result
+
+  get-current:            func(moovable-type: string) -> moovable-result
+
+  set-current:            func(name: string) -> moovable-result
+
+  get-goal:               func() -> u32
+
+  set-goal:               func(goal: u32) -> ()
+
+  import-moovable:        func(moovable: moovable) -> moovable-result
+
+  import-all:             func(moovables: moovables) -> () 
+
+  get-trend:              func(name: string, end-date: string) -> trend-result
+
+}
+
+world moovables {
+  export api
+}
+
+
