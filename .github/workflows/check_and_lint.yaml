@@ -20,11 +20,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: check
-          args: --manifest-path /mooving/Cargo.toml
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --manifest-path /mooving/Cargo.toml
+          args: --manifest-path mooving/Cargo.toml
     
   fmt:
     name: Rustfmt
@@ -40,11 +36,11 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check --manifest-path /mooving/Cargo.toml
+          args: --all -- --check --manifest-path mooving/Cargo.toml
       - uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check --manifest-path /wasm/Cargo.toml
+          args: --all -- --check --manifest-path wasm/Cargo.toml
   
   clippy:
     name: Clippy
@@ -59,6 +55,6 @@ jobs:
       - uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --manifest-path /mooving/Cargo.toml
+          args: --all-features --manifest-path mooving/Cargo.toml
           name: Clippy Output
   
