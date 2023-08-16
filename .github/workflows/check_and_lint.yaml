@@ -22,7 +22,7 @@ jobs:
           command: check
           args: --manifest-path mooving/Cargo.toml
 
-  check-wasm:
+  build-wasm:
     name: Check wasm
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
       - name: Install cargo-component (debug)
         run: cargo install --git https://github.com/bytecodealliance/cargo-component --locked cargo-component
       - name: Component check
-        run: (cd wasm && cargo component check)
+        run: (cd wasm && cargo component build --release)
 
   fmt:
     name: Rustfmt
@@ -53,20 +53,4 @@ jobs:
         with:
           command: fmt
           args: --manifest-path wasm/Cargo.toml --all -- --check
-  
-  # clippy:
-  #   name: Clippy
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: stable
-  #         components: clippy
-  #         override: true
-  #     - uses: actions-rs/clippy-check@v1
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         args: --all-features --manifest-path mooving/Cargo.toml
-  #         name: Clippy Output
   
