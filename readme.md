@@ -1,6 +1,6 @@
 # Mooving on Golem
 
-This is a PoC to play around with (Golem)[https://golem.cloud/]
+This is a PoC to play around with [Golem](https://golem.cloud/)
 
 ## About the application
 
@@ -11,19 +11,20 @@ The mooving app is an app to keep track of my moovables and be able to update di
 
 The original App is a command line app in Elixir which I use to keep track of my cycling
 
-Since then I use it to learn new languages and frameworks
-so far I've written it in:
+Since then I use it to learn new languages and frameworks, so far I've written it in:
 
 - Elixir cmd line with a json file backend
-- Go cmd line and rest api with a json and faunadb backend
-- Scala / ZIO API with a faunadb backend
+- Go cmd line with a json file backend
+- Go rest api with a faunadb backend
+- Scala / ZIO/zio-http/Tapir API with a faunadb backend
+- Rust axum api with a json file backend
 
 ## About the Golem PoC
 
-Functionality is split into 
+Functionality is split into:
 
-- business logic with tests
-- webassembly module where the wit (webassembly system interface) is defined and conversion methods between the wit structs and the business logic structs
+- business logic with tests in `./mooving`
+- webassembly module in `./wasm` where the wit (webassembly system interface) is defined and conversion methods between the wit structs and the business logic structs
 
 ## build it
 
