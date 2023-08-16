@@ -36,11 +36,11 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check --manifest-path mooving/Cargo.toml
+          args: --manifest-path mooving/Cargo.toml --all -- --check
       - uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check --manifest-path wasm/Cargo.toml
+          args: --manifest-path wasm/Cargo.toml --all -- --check
   
   clippy:
     name: Clippy
