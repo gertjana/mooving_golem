@@ -4,13 +4,13 @@ This is a PoC to play around with [Golem](https://golem.cloud/)
 
 ## About the application
 
-A `Moovable` is something that keeps track of distance moved, in my case my bike and my (lease) car
+A `Moovable` is something that keeps track of distance travelled, in my case on my bike and my (lease) car
 
-The mooving app is an app to keep track of my moovables and be able to update distance traveled, and do a linear extrapolation to see how much I moved at a certain date.
+The mooving app is an app to keep track of my moovables and be able to update distance traveled, and do linear extrapolation to see how much I moved at a future date.
 
 The original App is a command line app in Elixir which I use to keep track of my cycling, and make sure I don't go over the lease limit of my car.
 
-Since then I use it to learn new languages and frameworks
+Since then I use ghe concept to learn new languages and frameworks
 
 ## About the Golem PoC
 
@@ -28,6 +28,8 @@ Functionality is split into:
 this will check/test/fmt/lint the code, build the webassembly binary and should result in a `mooving.wasm` file in the root directory
 
 ## run it
+
+expects golem-cli and rust to be installed on your machine
 
 ```bash
 > golem component add -c mooving_comp ./mooving.wasm
