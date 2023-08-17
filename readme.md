@@ -25,7 +25,7 @@ Functionality is split into:
 ./test_and_build.sh
 ```
 
-this should create a `mooving.wasm` file in the root directory
+this will check/test/fmt/lint the code, build the webassembly binary and should result in a `mooving.wasm` file in the root directory
 
 ## run it
 
@@ -75,7 +75,7 @@ componentVersionUsed: 0
 ]
 ```
 
-and after adding a few more data points, do the trend analysis
+and after adding a few more data points, we can do a trend analysis
 
 ```bash
 > golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \
@@ -120,3 +120,9 @@ and after adding a few more data points, do the trend analysis
   }
 ]
 ```
+
+
+## TODO
+
+- watch the next webinar to learn new stuff :)
+- get the CI working with the cargo component plugin
