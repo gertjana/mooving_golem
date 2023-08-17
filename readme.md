@@ -8,23 +8,16 @@ A `Moovable` is something that keeps track of distance moved, in my case my bike
 
 The mooving app is an app to keep track of my moovables and be able to update distance traveled, and do a linear extrapolation to see how much I moved at a certain date.
 
+The original App is a command line app in Elixir which I use to keep track of my cycling, and make sure I don't go over the lease limit of my car.
 
-The original App is a command line app in Elixir which I use to keep track of my cycling
-
-Since then I use it to learn new languages and frameworks, so far I've written it in:
-
-- Elixir cmd line with a json file backend
-- Go cmd line with a json file backend
-- Go rest api with a faunadb backend
-- Scala / ZIO/zio-http/Tapir API with a faunadb backend
-- Rust axum api with a json file backend
+Since then I use it to learn new languages and frameworks
 
 ## About the Golem PoC
 
 Functionality is split into:
 
 - business logic with tests in `./mooving`
-- webassembly module in `./wasm` where the wit (webassembly system interface) is defined and conversion methods between the wit structs and the business logic structs
+- webassembly module in `./wasm` where the wit (webassembly system interface) and conversion methods between the wit structs and the business logic structs are defined
 
 ## build it
 
@@ -34,7 +27,7 @@ Functionality is split into:
 
 this should create a `mooving.wasm` file in the root directory
 
-# run it
+## run it
 
 ```bash
 > golem component add -c mooving_comp ./mooving.wasm
@@ -51,7 +44,8 @@ instanceId:
   instanceName: mooviong_inst
 componentVersionUsed: 0
 
-> golem instance invoke-and-await -c mooving_comp -i mooving_inst -f mooving:moovables/api/add-moovable -j '["my-bike", "bike"]' -F json
+> golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \
+        -f mooving:moovables/api/add-moovable -j '["my-bike", "bike"]'
 [
   {
     "ok" : {
@@ -62,7 +56,8 @@ componentVersionUsed: 0
     }
   }
 
-> golem instance invoke-and-await -c <component-name> -i <instance-name> -f mooving:moovables/api/add-data -j '["my-bike", {"km":100, "date": "2023-08-05"}]' -F json
+> golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \ 
+        -f mooving:moovables/api/add-data -j '["my-bike", {"km":100, "date": "2023-08-05"}]'
 [
   {
     "ok" : {
@@ -83,7 +78,8 @@ componentVersionUsed: 0
 and after adding a few more data points, do the trend analysis
 
 ```bash
-> golem instance invoke-and-await -c m -i ci -f mooving:moovables/api/get-moovable --V 1 -j '["my-bike"]' -F json
+> golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \
+        -f mooving:moovables/api/get-moovable -j '["my-bike"]'
 [
   {
     "ok" : {
@@ -108,7 +104,8 @@ and after adding a few more data points, do the trend analysis
   }
 ]
 
-> golem instance invoke-and-await -c m -i ci -f mooving:moovables/api/get-trend --V 1 -j '["my-bike", "2023-08-31"]' -F json
+> golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \ 
+        -f mooving:moovables/api/get-trend -j '["my-bike", "2023-08-31"]'
 [
   {
     "ok" : {
