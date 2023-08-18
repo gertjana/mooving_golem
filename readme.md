@@ -141,7 +141,6 @@ and after adding a few more data points, we can do a trend analysis
 ]
 ```
 
-
 ## TODO
 
 - get the CI working with the cargo component plugin

@@ -25,7 +25,7 @@ interface api {
     average-to-reach-goal: float64,
     goal: u32,
     total: u32,
-    this-period: u32,
+    this-: u32,
     moovable-name: string,
   }
 
