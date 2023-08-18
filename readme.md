@@ -45,7 +45,7 @@ exports:
   - 'mooving:moovables/api/add-data(name: str, data: {date: str, km: u32}) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
   - 'mooving:moovables/api/get-current(moovable-type: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
   - 'mooving:moovables/api/set-current(name: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
-  - mooving:moovables/api/get-goal() => u32
+  - 'mooving:moovables/api/get-goal() => u32'
   - 'mooving:moovables/api/set-goal(goal: u32) => '
   - 'mooving:moovables/api/import-moovable(moovable: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
   - 'mooving:moovables/api/import-all(moovables: {goal: u32, moovables: [{name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}]}) => '
