@@ -144,5 +144,4 @@ and after adding a few more data points, we can do a trend analysis
 
 ## TODO
 
-- watch the next webinar to learn new stuff :)
 - get the CI working with the cargo component plugin
