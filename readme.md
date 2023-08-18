@@ -38,14 +38,32 @@ componentVersion: 0
 componentName: mooving_comp
 componentSize: 476643
 exports: 
-  - left out for brevity
+  - 'mooving:moovables/api/get-moovables() => [{name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}]'
+  - 'mooving:moovables/api/get-moovables-by-type(moovable-type: str) => [{name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}]'
+  - 'mooving:moovables/api/get-moovable(name: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - 'mooving:moovables/api/add-moovable(name: str, moovable-type: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - 'mooving:moovables/api/add-data(name: str, data: {date: str, km: u32}) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - 'mooving:moovables/api/get-current(moovable-type: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - 'mooving:moovables/api/set-current(name: str) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - mooving:moovables/api/get-goal() => u32
+  - 'mooving:moovables/api/set-goal(goal: u32) => '
+  - 'mooving:moovables/api/import-moovable(moovable: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}) => variant(ok: {name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}, error: str)'
+  - 'mooving:moovables/api/import-all(moovables: {goal: u32, moovables: [{name: str, moovable-type: str, current: bool, data: [{date: str, km: u32}]}]}) => '
+  - 'mooving:moovables/api/get-trend(name: str, end-date: str) => variant(ok: {average: f64, days: u32, average-to-reach-goal: f64, goal: u32, total: u32, this-period: u32, moovable-name: str}, error: str)'
+```
 
+This adds the component and gives you back a list of exported functions, lets instantiate the component:
+
+```bash
 > golem instance add -c mooving_comp -i mooving_inst
 instanceId:
   rawComponentId: 1aeb6392-3415-492d-9a0a-f6db43fec746
-  instanceName: mooviong_inst
+  instanceName: mooving_inst
 componentVersionUsed: 0
+```
+and add some data
 
+```bash
 > golem instance invoke-and-await -c mooving_comp -i mooving_inst -F json \
         -f mooving:moovables/api/add-moovable -j '["my-bike", "bike"]'
 [
