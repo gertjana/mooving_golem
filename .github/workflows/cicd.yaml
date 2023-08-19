@@ -4,11 +4,11 @@ on:
       branches:
         - main
   
-name: Check and Lint
+name: Mooving CI
  
 jobs:
-  check-mooving:
-    name: Check
+  check:
+    name: Component Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,13 +17,15 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+      - name: Install cargo-component (debug)
+        run: cargo install --git https://github.com/bytecodealliance/cargo-component --locked cargo-component      
       - uses: actions-rs/cargo@v1
         with:
-          command: check
-          args: --manifest-path mooving/Cargo.toml
+          command: component
+          args: check
 
   fmt:
-    name: Rustfmt
+    name: Rust Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,13 +38,24 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --manifest-path mooving/Cargo.toml --all -- --check
+          args: --all -- --check
+
+  test-mooving:
+    name: Test Mooving
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
       - uses: actions-rs/cargo@v1
         with:
-          command: fmt
-          args: --manifest-path wasm/Cargo.toml --all -- --check
+          command: test
+          args: --all -- --nocapture --manifest-path=mooving/Cargo.toml
 
-  build-wasm:
+  build:
     name: Build wasm
     runs-on: ubuntu-latest
     steps:
@@ -50,8 +63,8 @@ jobs:
       - name: Install Rust
         run: rustup update stable --no-self-update && rustup default stable && rustup target add wasm32-wasi && rustup target add wasm32-unknown-unknown
       - name: Install cargo-component (debug)
-        run: (cd wasm && cargo install --git https://github.com/bytecodealliance/cargo-component --locked cargo-component)
+        run: cargo install --git https://github.com/bytecodealliance/cargo-component --locked cargo-component
       - name: Component check
-        run: (cd wasm && cargo component build --release)
+        run: cargo component build --release
         
         
