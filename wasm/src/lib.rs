@@ -1,12 +1,12 @@
 cargo_component_bindings::generate!();
 
+use crate::bindings::exports::mooving::moovables::api::{
+    Data as WitData, Guest, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
+    Moovables as WitMoovables, TrendResult as WitTrendResult,
+};
 use bindings::*;
 use conversions::{
     from_wit_data, from_wit_moovable, from_wit_moovables, into_wit_moovable, into_wit_trend,
-};
-use crate::bindings::exports::mooving::moovables::api::{
-    Guest, Data as WitData, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
-    Moovables as WitMoovables, TrendResult as WitTrendResult,
 };
 // use exports::mooving::moovables::api::{
 //     Api, Data as WitData, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
