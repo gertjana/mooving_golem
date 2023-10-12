@@ -1,15 +1,21 @@
+cargo_component_bindings::generate!();
+
 use bindings::*;
 use conversions::{
     from_wit_data, from_wit_moovable, from_wit_moovables, into_wit_moovable, into_wit_trend,
 };
-use exports::mooving::moovables::api::{
-    Api, Data as WitData, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
+use crate::bindings::exports::mooving::moovables::api::{
+    Guest, Data as WitData, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
     Moovables as WitMoovables, TrendResult as WitTrendResult,
 };
+// use exports::mooving::moovables::api::{
+//     Api, Data as WitData, Moovable as WitMoovable, MoovableResult as WitMoovableResult,
+//     Moovables as WitMoovables, TrendResult as WitTrendResult,
+// };
 use mooving::{MoovingState, NEW_MOOVING_STATE};
 
 mod conversions;
-struct MoovablesImpl;
+struct Component;
 
 struct State(MoovingState);
 
@@ -28,7 +34,7 @@ where
     tmp
 }
 
-impl Api for MoovablesImpl {
+impl Guest for Component {
     fn set_goal(goal: u32) {
         with_state(|State(state)| {
             state.goal = goal;
@@ -184,5 +190,3 @@ impl Api for MoovablesImpl {
         })
     }
 }
-
-bindings::export!(MoovablesImpl);
